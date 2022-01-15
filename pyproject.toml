@@ -1,0 +1,58 @@
+[tool.poetry]
+name = "car_holder"
+version = "0.1.0"
+description = "python bot for holding a car"
+authors = ["Spielmannmisha <drudkhmisha@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.26.0"
+pyTelegramBotAPI = "^3.8.0"
+python-telegram-bot-calendar = "^1.0.5"
+photo-calendar = "^0.1.1"
+Pillow = "^8.1.2"
+yoyo-migrations = "^7.3.1"
+wait-for-it = "^2.2.0"
+psycopg2-binary = "^2.9.1"
+pydantic = "^1.8.2"
+
+
+[tool.poetry.dev-dependencies]
+black = "^21.5b1"
+yoyo-migrations = "^7.3.1"
+flake8 = "^3.9.2"
+isort = "^5.9.1"
+pytest = "^6.2.4"
+
+[tool.poetry.scripts]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+exclude = '''
+(
+  \.eggs
+  |\.git
+  |\.hg
+  |\.mypy_cache
+  |\.nox
+  |\.tox
+  |\.venv
+  |_build
+  |buck-out
+  |build
+  |dist
+)
+'''
+
+[tool.isort]
+line_length = 100
+sections = ["FUTURE", "STDLIB", "DJANGO", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+multi_line_output = 3
+known_django = "django"
+profile = "django"
+src_paths = "app"
+lines_after_imports = 2

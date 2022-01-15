@@ -1,0 +1,40 @@
+version: '3.1'
+
+services:
+
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: spnn
+    volumes:
+      - type: volume
+        source: data_folder
+        target: "/var/lib/postgresql/data"
+
+    networks:
+      psql_net:
+        aliases:
+          - kekw
+
+  carholder:
+    image: bystrovmikhail/carholder:latest
+    restart: always
+    env_file: 
+      - /etc/custom_env/.env.car
+    networks:
+      - psql_net
+    depends_on:
+      - database
+    command:
+      wait-for-it --service database:5432 --
+      python main.py
+
+networks:
+  psql_net:
+    driver: bridge
+    external: true
+    name: psql_net
+
+volumes:
+  data_folder: {}
